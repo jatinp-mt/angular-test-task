@@ -1,0 +1,30 @@
+<div class="container">
+  <div id="modal-content-wrapper">
+    <header id="modal-header">
+      <h1 id="modal-title">Create Dashboard</h1>
+    </header>
+    <mat-form-field appearance="outline">
+      <mat-label>DashBoards Title</mat-label>
+      <input matInput type="text" [(ngModel)]="newDashboard" />
+    </mat-form-field>
+    <mat-dialog-actions align="end">
+      <button
+        mat-raised-button
+        id="modal-close-button"
+        class="modalButtons"
+        (click)="closeModal()"
+      >
+        Cancel
+      </button>
+      <button
+        mat-raised-button
+        color="primary"
+        id="modal-close-button"
+        class="modalButtons"
+        (click)="createDashboard()"
+      >
+        Done
+      </button>
+    </mat-dialog-actions>
+  </div>
+</div>

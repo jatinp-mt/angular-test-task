@@ -1,0 +1,155 @@
+<div class="container-fluid">
+  <div class="wrapper">
+    <div class="dashboar-options">
+      <div>
+        <!-- Dashboard - selection -->
+        <mat-form-field appearance="outline">
+          <mat-label>DashBoards</mat-label>
+          <mat-select
+            [formControl]="dashboards"
+            [(ngModel)]="dashboardselected"
+            (selectionChange)="handleOnChangeDashboard($event)"
+          >
+            <mat-option
+              *ngFor="let dashboard of dashboardList"
+              [value]="dashboard"
+              >{{ dashboard }}</mat-option
+            >
+            <mat-option
+              ><button mat-button (click)="addDashboard()">
+                Add dashboard
+              </button></mat-option
+            >
+          </mat-select>
+        </mat-form-field>
+
+        <!-- Graphs - selection -->
+        <mat-form-field appearance="outline">
+          <mat-label>Graphs</mat-label>
+          <mat-select [formControl]="graphs" multiple>
+            <mat-select-trigger>
+              {{graphs.value?.[0] || ''}}
+              <span
+                *ngIf="(graphs.value?.length || 0) > 1"
+                class="example-additional-selection"
+              >
+                (+{{ (graphs.value?.length || 0) - 1 }}
+                {{ graphs.value?.length === 2 ? "other" : "others" }})
+              </span>
+            </mat-select-trigger>
+            <mat-option *ngFor="let graph of graphsList" [value]="graph">{{
+              graph
+            }}</mat-option>
+          </mat-select>
+        </mat-form-field>
+
+        <!-- Assigne - selection -->
+        <mat-form-field appearance="outline">
+          <mat-label>Assignee</mat-label>
+          <mat-select
+            [formControl]="assignee"
+            [(ngModel)]="assigneeSelected"
+            (selectionChange)="handleOnChangeAssignee($event)"
+          >
+            <mat-option
+              *ngFor="let assignee of assigneList"
+              [value]="assignee"
+              >{{ assignee }}</mat-option
+            >
+          </mat-select>
+        </mat-form-field>
+      </div>
+      <button
+        mat-stroked-button
+        aria-label="Export as an PDF"
+        matTooltip="Export as an PDF"
+        (click)="exportAsPDF('pdfContent')"
+      >
+        Export as PDF <mat-icon>save_alt</mat-icon>
+      </button>
+    </div>
+
+    <div class="row" *ngIf="(graphs.value?.length || 0) > 0">
+      <div class="content" id="pdfContent">
+        <div fxLayout="row wrap" fxLayoutGap="16px grid">
+          <div
+            fxFlex="50%"
+            fxFlex.xs="100%"
+            fxFlex.sm="40%"
+            *ngFor="let chart of graphs.value"
+          >
+            <mat-card
+              *ngIf="chart === 'Line-Chart'"
+              class="mat-elevation-z4 graph-card"
+            >
+              <mat-card-header>
+                <mat-card-title class="mb-2"
+                  >Modules Report</mat-card-title
+                >
+              </mat-card-header>
+              <mat-card-content>
+                <mat-spinner
+                  style="margin: auto"
+                  *ngIf="isLoading"
+                ></mat-spinner>
+                <app-line-chart
+                  *ngIf="filteredChartData && !isLoading"
+                  [lineData]="filteredChartData"
+                ></app-line-chart>
+              </mat-card-content>
+            </mat-card>
+            <mat-card
+              *ngIf="chart === 'Bar-Chart'"
+              class="mat-elevation-z4 graph-card"
+            >
+              <mat-card-header>
+                <mat-card-title>Operator Compliance Report</mat-card-title>
+              </mat-card-header>
+              <mat-card-content>
+                <mat-spinner
+                  style="margin: auto"
+                  *ngIf="isLoading"
+                ></mat-spinner>
+                <app-bar-chart
+                  *ngIf="filteredChartData && !isLoading"
+                  [barData]="filteredChartData"
+                ></app-bar-chart>
+              </mat-card-content>
+            </mat-card>
+            <mat-card
+              *ngIf="chart === 'Pie-Chart'"
+              class="mat-elevation-z4 graph-card"
+            >
+              <mat-card-header>
+                <mat-card-title>Operator Status Report</mat-card-title>
+              </mat-card-header>
+              <mat-card-content>
+                <mat-spinner
+                  style="margin: auto"
+                  *ngIf="isLoading"
+                ></mat-spinner>
+                <app-pie-chart
+                  *ngIf="filteredChartData && !isLoading"
+                  [pieData]="filteredChartData"
+                ></app-pie-chart>
+              </mat-card-content>
+            </mat-card>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div *ngIf="graphs.value?.length === 0">
+      <div class="content">
+        <div fxLayout="row wrap" fxLayoutGap="16px grid">
+          <div fxFlex="100%" fxFlex.xs="100%" fxFlex.sm="100%">
+            <mat-card class="mat-elevation-z4 graph-card">
+              <mat-card-content class="no-data">
+                <p>No, Charts Selected</p>
+              </mat-card-content>
+            </mat-card>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

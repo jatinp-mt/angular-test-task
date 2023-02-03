@@ -1,0 +1,14 @@
+#modal-content-wrapper {
+    padding: 16px 16px;
+}
+#modal-title {
+    font-size: 22px;
+}
+.modal-footer-buttons {
+    justify-self: right;
+    align-self: center;
+}
+
+.modalButtons {
+    margin: 3px;
+}

@@ -1,0 +1,43 @@
+.wrapper {
+    margin: 10px auto;
+}
+
+.mat-grid-tile {
+    border: solid 0.1px #000;
+    border-radius: 5px;
+}
+
+.content {
+    padding: 16px;
+}
+
+.dashboar-options mat-form-field  {
+    margin: 5px;
+}
+
+mat-card.mat-mdc-card.mdc-card.mat-elevation-z4.graph-card.ng-star-inserted {
+    height: 100%;
+    box-shadow: 5px 5px 5px #aaaaaa;
+    border: 1.5px solid #BFBFBF;
+    
+
+}
+
+mat-card-header.mat-mdc-card-header {
+    padding-bottom: 16px;
+}
+
+mat-card-content.mat-mdc-card-content.no-data {
+    text-align: center;
+}
+
+.dashboar-options {
+    display: flex;
+    justify-content: space-between;
+}
+
+mat-spinner {
+    zoom: 0.5
+  }
+
+
